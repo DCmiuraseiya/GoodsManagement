@@ -4,7 +4,7 @@ public class Form {
     private int id;
     private String name;
     private int stock ;
-    private String categoly;
+    private String category;
     private int price;
     public int getId() {
         return id;
@@ -14,8 +14,8 @@ public class Form {
         this.id = id;
     }
 
-    public String getCategoly() {
-        return categoly;
+    public String getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -42,8 +42,8 @@ public class Form {
         this.name = name;
     }
 
-    public void setCategoly(String categoly) {
-        this.categoly = categoly;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 
