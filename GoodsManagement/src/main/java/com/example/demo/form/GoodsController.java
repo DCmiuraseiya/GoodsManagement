@@ -25,7 +25,7 @@ public class GoodsController {
 	}
     @RequestMapping("/index")
     public String top(Model model, Form form) {
-        model.addAttribute("title", "トップページ");
+        model.addAttribute("title", "商品管理ページ");
         List<Goods> list = goodsdao.searchDb();
         model.addAttribute("dbList", list);
         return "index";
@@ -34,11 +34,12 @@ public class GoodsController {
 	//確認
 	@RequestMapping("/complete")
 	public String complete(Model model, Form form) {
-		model.addAttribute("title", "完了ページ");
+		model.addAttribute("title", "登録完了ページ");
 		Goods goods = new Goods();
 		goods.setName(form.getName());
 		goods.setStock(form.getStock());
 		goods.setCategory(form.getCategory());
+		goods.setPrice(form.getPrice());
 		goodsdao.insertDb(goods);
 		return "goods/complete";
 	}
@@ -79,6 +80,12 @@ public class GoodsController {
         goodsdao.updateDb(id, goods);
         return "redirect:/index";
 
+	}
+
+	@RequestMapping("/delete/{id}")
+	public String delete(@PathVariable Long id) {
+		goodsdao.deleteDb(id);
+		return "redirect:/index";
 	}
 }
 
