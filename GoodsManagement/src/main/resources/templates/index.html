@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>GoodsManagement</title>
+</head>
+<body>
+<h1><span th:text="${title}"></span></h1>
+
+<h2>入力</h2>
+<form method="get" action="#" th:action="@{/confirm}"  th:object="${form}">
+
+<p>商品名</p>
+<p><input type="text" name="name" th:value="*{name}"></p>
+<p>在庫数</p>
+<p><input type="text" name="stock" th:value="*{stock}"></p>
+<p>カテゴリー</p>
+<p><input type="text" name="category" th:value="*{category}"></p>
+<p>値段</p>
+<p><input type="text" name="price" th:value="*{price}"></p>
+<input type="submit" value="送信">
+</form>
+
+<h2>商品一覧</h2>
+	<table>
+		<tr>
+			<th>商品名</th>
+			<th>在庫数</th>
+			<th>カテゴリー</th>
+			<th>値段</th>
+		</tr>
+		<tr th:each="res: ${dbList}">
+			<td th:text="${res.name}"></td>
+			<td th:text="${res.stock}"></td>
+			<td th:text="${res.category}"></td>
+			<td th:text="${res.price}"></td>
+		</tr>
+	</table>
+</body>
+</html>
