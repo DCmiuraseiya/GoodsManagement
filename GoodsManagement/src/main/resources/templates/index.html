@@ -31,6 +31,8 @@
 			<th>在庫数</th>
 			<th>カテゴリー</th>
 			<th>値段</th>
+			<th>編集</th>
+			<th>削除</th>
 		</tr>
 		<tr th:each="res: ${dbList}">
 			<!-- <td th:text="${res.id}"></td> -->
@@ -42,6 +44,8 @@
 				<form method="get" action="#" th:action="@{/edit/{id}(id=${res.id})}">
 					<input type="submit" value="編集">
 				</form>
+			</td>
+			<td>
 				<form method="get" action="#" th:action="@{/delete/{id}(id=${res.id})}">
 					<input type="submit" value="削除">
 				</form>
