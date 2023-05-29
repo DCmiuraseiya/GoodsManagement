@@ -25,6 +25,6 @@ public class GoodsController {
 		goods.setStock(form.getStock());
 		goods.setCategory(form.getCategory());
 		goodsdao.insertDb(goods);
-		return "/complete";
+		return "goods/complete";
 	}
 }
