@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 
 import com.example.demo.db.Goods;
 
@@ -18,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.db.Goods;
 import com.example.demo.db.GoodsDao;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+
 public class GoodsController {
 	private final GoodsDao goodsdao;
 
@@ -41,6 +45,24 @@ public class GoodsController {
     }
 
 
+
+	private final GoodsDao goodsdao;
+
+	@Autowired
+	public GoodsController(GoodsDao goodsdao) {
+		this.goodsdao = goodsdao;
+	}
+
+	//確認
+	@RequestMapping("/complete")
+	public String complete(Model model, Form form) {
+		model.addAttribute("title", "完了ページ");
+		Goods goods = new Goods();
+		goods.setName(form.getName());
+		goods.setStock(form.getStock());
+		goods.setCategory(form.getCategory());
+		goodsdao.insertDb(goods);
+		return "goods/complete";
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.goodsdao = goodsdao;
 	}
@@ -74,11 +96,6 @@ public class GoodsController {
 	
 	@RequestMapping("/edit/{id}/exe")
     public String editExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("edit_title", "編集画面");
-            model.addAttribute("carender", "カレンダーを入力してください");
-            return "diary/edit";
-        }
         Goods goods = new Goods();
         goods.setStock(form.getStock());
         goods.setName(form.getName());
@@ -86,6 +103,7 @@ public class GoodsController {
         goods.setPrice(form.getPrice());
         goodsdao.updateDb(id, goods);
         return "redirect:/index";
+
 	}
 }
 
