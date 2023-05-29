@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hello</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+	<h1 th:text="${title}"></h1>
+	<div th:object="${goods}">
+		<form action="#" method="get" th:action="@{/edit/__*{id}__/exe}">
+			<p>
+				番号:<span th:text="*{id}"></span> <input type="hidden" name="id" th:value="*{id}">
+			</p>
+			<p>
+				商品名: <input type="text" name="name" th:value="*{name}">
+			</p>
+			<p>
+				在庫数: <input type="number" name="priority" th:value="*{stock}">
+			</p>
+			<p>
+				カテゴリー: <input type="text" name="category" th:value="*{category}">
+			</p>
+			<p>
+				値段: <input type="text" name="price" th:value="*{price}">
+			</p>
+			<input type="submit" value="更新">
+		</form>
+	</div>
+</body>
+</html>
