@@ -14,4 +14,7 @@ public class GoodsDao {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.db=db;
 	}
+	public void deleteDb(long id){
+		db.update("DELETE FROM goods WHERE id = ?" , id);
+	}
 }
