@@ -4,15 +4,16 @@ public class Goods {
     private int id;
     private String name;
     private int stock;
-    private String categoly;
+    private String category;
+    
     private int price;
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getCategoly() {
-        return categoly;
+    public String getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -39,7 +40,7 @@ public class Goods {
         this.name = name;
     }
 
-    public void setCategoly(String categoly) {
-        this.categoly = categoly;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
