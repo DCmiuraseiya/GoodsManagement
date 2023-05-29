@@ -23,8 +23,13 @@ public class GoodsDao {
 		db.update("DELETE FROM goods WHERE id = ?", id);
 	}
 
+  //SELCT処理
+	public List<Goods> searchDb(){
+
+
 	//SELCT処理
 	public List<Goods> serchDB() {
+
 		//取得
 		String sql = "SELECT * FROM goods;";
 
@@ -80,7 +85,11 @@ public class GoodsDao {
 	public void updateDb(Long id, Goods goods) {
 		//コンソールに表示
 		System.out.println("編集の実行");
+
+		db.update("UPDATE goods SET name=?, stock=?, category=?, price=? WHERE id=?", goods.getName(), goods.getStock(), goods.getCategory(), goods.getPrice(), id);
+
 		db.update("UPDATE goods SET name=?, stock=?, categoly=?, price=? WHERE id=?", goods.getName(), goods.getStock(),
 				goods.getCategory(), goods.getPrice(), id);
+
 	}
 }
