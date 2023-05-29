@@ -19,7 +19,8 @@ public class GoodsDao {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.db=db;
 	}
-	
+  
+  //SELCT処理
 	public List<Goods> serchDB(){
 		//取得
 		String sql = "SELECT * FROM goods;";
@@ -44,31 +45,18 @@ public class GoodsDao {
 		}
 		return goodslist;
 	}
+
+	public void insertDb(Goods goods) {
+		db.update("INSERT INTO goods (name,stock,category,price) VALUES(?,?,?)", 
+				goods.getName(),
+				goods.getStock(), 
+				goods.getCategoly(),
+				goods.getPrice());
+	}
 	
-	/*
-	public List<EntForm> searchDb() {
-		String sql = "SELECT * FROM sample";
-
-		//データベースから取り出したデータをresultDB1に入れる
-		List<Map<String, Object>> resultDb1 = db.queryForList(sql);
-
-		//画面に表示しやすい形のList(resultDB2)を用意
-		List<EntForm> resultDb2 = new ArrayList<EntForm>();
-
-		//1件ずつピックアップ
-		for (Map<String, Object> result1 : resultDb1) {
-
-			//データ1件分を1つのまとまりとしたEntForm型の「entformdb」を生成
-			EntForm entformdb = new EntForm();
-
-			//id、nameのデータをentformdbに移す
-			entformdb.setId((int) result1.get("id"));
-			entformdb.setName((String) result1.get("name"));
-			entformdb.setEmail((String) result1.get("email"));
-			entformdb.setNickname((String) result1.get("nickname"));
-			entformdb.setMessage((String) result1.get("message"));
-			//移し替えたデータを持ったentformdbを、resultDB2に入れる
-			resultDb2.add(entformdb);
-		}
-		*/
+	public void updateDb(Long id, Goods goods) {
+		//コンソールに表示
+		System.out.println("編集の実行");
+		db.update("UPDATE goods SET name=?, stock=?, categoly=?, price=? WHERE id=?", goods.getName(), goods.getStock(), goods.getCategoly(), goods.getPrice(), id);
+	}
 }
