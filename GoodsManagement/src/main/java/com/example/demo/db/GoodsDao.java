@@ -23,12 +23,8 @@ public class GoodsDao {
 		db.update("DELETE FROM goods WHERE id = ?", id);
 	}
 
-  //SELCT処理
-	public List<Goods> searchDb(){
-
-
 	//SELCT処理
-	public List<Goods> serchDB() {
+	public List<Goods> searchDb() {
 
 		//取得
 		String sql = "SELECT * FROM goods;";
@@ -54,7 +50,7 @@ public class GoodsDao {
 		return goodslist;
 	}
 
-	public Goods serchDbOne(Long id) {
+	public Goods searchDbOne(Long id) {
 		//取得
 		String sql = "SELECT * FROM goods WHERE id=" +id;
 
@@ -75,7 +71,7 @@ public class GoodsDao {
 	}
 
 	public void insertDb(Goods goods) {
-		db.update("INSERT INTO goods (name,stock,category,price) VALUES(?,?,?)",
+		db.update("INSERT INTO goods (name,stock,category,price) VALUES(?,?,?,?)",
 				goods.getName(),
 				goods.getStock(),
 				goods.getCategory(),
@@ -86,10 +82,10 @@ public class GoodsDao {
 		//コンソールに表示
 		System.out.println("編集の実行");
 
-		db.update("UPDATE goods SET name=?, stock=?, category=?, price=? WHERE id=?", goods.getName(), goods.getStock(), goods.getCategory(), goods.getPrice(), id);
-
-		db.update("UPDATE goods SET name=?, stock=?, categoly=?, price=? WHERE id=?", goods.getName(), goods.getStock(),
-				goods.getCategory(), goods.getPrice(), id);
-
+		db.update("UPDATE goods SET name=?, stock=?, category=?, price=? WHERE id=?", 
+				goods.getName(), 
+				goods.getStock(), 
+				goods.getCategory(), 
+				goods.getPrice(), id);
 	}
 }

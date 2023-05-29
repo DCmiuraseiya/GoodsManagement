@@ -1,30 +1,17 @@
 package com.example.demo.form;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-
-import com.example.demo.db.Goods;
-
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.db.Goods;
 import com.example.demo.db.GoodsDao;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 
@@ -44,15 +31,6 @@ public class GoodsController {
         return "index";
     }
 
-
-
-	private final GoodsDao goodsdao;
-
-	@Autowired
-	public GoodsController(GoodsDao goodsdao) {
-		this.goodsdao = goodsdao;
-	}
-
 	//確認
 	@RequestMapping("/complete")
 	public String complete(Model model, Form form) {
@@ -63,8 +41,6 @@ public class GoodsController {
 		goods.setCategory(form.getCategory());
 		goodsdao.insertDb(goods);
 		return "goods/complete";
-		// TODO 自動生成されたコンストラクター・スタブ
-		this.goodsdao = goodsdao;
 	}
 	
 
@@ -76,9 +52,8 @@ public class GoodsController {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
 			//データベースから取得
-			List<Goods> list = goodsdao.serchDB();
-			//TODO:masterブランチでは下記の関数を使用する
-			//List<Goods> list = goodsdao.serchDb();
+			List<Goods> list = goodsdao.searchDb();
+			
 			//データベースに格納
 			model.addAttribute("dbList", list);
 			return "goods/input";
@@ -88,8 +63,8 @@ public class GoodsController {
 	 }
 
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Long id,Model model) {
-		Goods goods=goodsdao.serchDbOne(id);
+	public String edit(@PathVariable Long id,Model model,Form form) {
+		Goods goods=goodsdao.searchDbOne(id);
 		model.addAttribute("goods",goods);
 		return "/goods/edit";
 	}

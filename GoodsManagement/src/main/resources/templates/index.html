@@ -8,18 +8,18 @@
 <h1><span th:text="${title}"></span></h1>
 
 <h2>入力</h2>
-<!--<form method="get" action="#" th:action="@{/confirm}"  th:object="${form}">-->
+<form method="get" action="#" th:action="@{/confirm}"  th:object="${form}">
 
-<!--<p>商品名</p>-->
-<!--<p><input type="text" name="name" th:value="*{name}"></p>-->
-<!--<p>在庫数</p>-->
-<!--<p><input type="text" name="stock" th:value="*{stock}"></p>-->
-<!--<p>カテゴリー</p>-->
-<!--<p><input type="text" name="category" th:value="*{category}"></p>-->
-<!--<p>値段</p>-->
-<!--<p><input type="text" name="price" th:value="*{price}"></p>-->
-<!--<input type="submit" value="送信">-->
-<!--</form>-->
+<p>商品名</p>
+<p><input type="text" name="name" th:value="*{name}"></p>
+<p>在庫数</p>
+<p><input type="text" name="stock" th:value="*{stock}"></p>
+<p>カテゴリー</p>
+<p><input type="text" name="category" th:value="*{category}"></p>
+<p>値段</p>
+<p><input type="text" name="price" th:value="*{price}"></p>
+<input type="submit" value="送信">
+</form>
 
 <h2>商品一覧</h2>
 	<table>
@@ -30,6 +30,7 @@
 			<th>値段</th>
 		</tr>
 		<tr th:each="res: ${dbList}">
+			<td th:text="${res.id}"></td>
 			<td th:text="${res.name}"></td>
 			<td th:text="${res.stock}"></td>
 			<td th:text="${res.category}"></td>
