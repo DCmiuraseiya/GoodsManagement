@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Hello</title>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<h1><span th:text="${title}"></span></h1>
+	<div th:object="${form}">
+		<p>入力内容ここから</p>
+		<p th:text="*{name}"></p>
+		<p th:text="*{stock}"></p>
+		<p th:text="*{category}"></p>
+		<p>入力内容ここまで</p>
+		
+<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
+<!--		hiddenなので見えないけどデータを送っている-->
+		<form method="get" action="#" th:action="@{/form}">
+			<input type="hidden" name="name" th:value="*{name}">
+			<input type="hidden" name="stock" th:value="*{stock}">
+			<input type="hidden" name="category" th:value="*{category}">
+			<input type="submit" value="入力画面へ">
+		</form>
+		
+<!--		確認画面にデータを送る処理-->
+		<form method="get" action="#" th:action="@{/complete}">
+			<input type="hidden" name="name" th:value="*{name}">
+			<input type="hidden" name="stock" th:value="*{stock}">
+			<input type="hidden" name="category" th:value="*{category}">
+			<input type="submit" value="完了画面へ">
+		</form>
+		
+	</div>
+	
+</body>
+
+</html>
