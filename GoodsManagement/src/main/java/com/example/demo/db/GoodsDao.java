@@ -22,4 +22,10 @@ public class GoodsDao {
 				goods.getCategoly(),
 				goods.getPrice());
 	}
+	
+	public void updateDb(Long id, Goods goods) {
+		//コンソールに表示
+		System.out.println("編集の実行");
+		db.update("UPDATE goods SET name=?, stock=?, categoly=?, price=? WHERE id=?", goods.getName(), goods.getStock(), goods.getCategoly(), goods.getPrice(), id);
+	}
 }
