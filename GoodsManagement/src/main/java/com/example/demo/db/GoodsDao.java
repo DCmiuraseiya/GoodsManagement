@@ -21,7 +21,7 @@ public class GoodsDao {
 	}
 	public void deleteDb(long id){
 		db.update("DELETE FROM goods WHERE id = ?" , id);
-  
+	}
   //SELCT処理
 	public List<Goods> serchDB(){
 		//取得
