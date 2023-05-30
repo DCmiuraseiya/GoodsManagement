@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Hello</title>
-<meta charset="utf-8" />
-<link rel="stylesheet" th:href="@{/style.css}">
+	<title>GoodsManagement</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/style.css}">
 </head>
+
 <body>
 	<h1 th:text="${title}"></h1>
 	<div th:object="${goods}">
@@ -28,4 +30,5 @@
 		</form>
 	</div>
 </body>
+
 </html>
