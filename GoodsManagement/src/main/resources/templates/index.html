@@ -14,19 +14,17 @@
 
 		<p>商品名</p>
 		<p><input type="text" name="name" th:value="*{name}"></p>
+		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
 		<p>在庫数</p>
 		<p><input type="text" name="stock" th:value="*{stock}"></p>
-		<p>カテゴリー
-		<p>
-		<select name="category" required>
-		<option value="">選択してください</option>
-		<option value="カテゴリー1">カテゴリー1</option>
-		<option value="カテゴリー2">カテゴリー2</option>
-		<option value="カテゴリー3">カテゴリー3</option>
-		</select>
-		</p>
+		<p><input type="number" name="stock" th:value="*{stock}"></p>
+		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
+		<p>カテゴリー</p>
+		<p><input type="text" name="category" th:value="*{category}"></p>
+		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
 		<p>値段</p>
-		<p><input type="text" name="price" th:value="*{price}"></p>
+		<p><input type="number" name="price" th:value="*{price}"></p>
+		<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
 		<input type="submit" value="送信">
 	</form>
 
@@ -34,10 +32,10 @@
 	<table>
 		<tr>
 			<!-- <th>id</th> -->
-			<th>商品名</th>
-			<th>在庫数</th>
-			<th>カテゴリー</th>
-			<th>値段</th>
+			<th><a th:href="@{/sort/{name}(name=name)}"> 商品名</a></th>
+			<th><a th:href="@{/sort/{name}(name=stock)}">在庫数</a></th>
+			<th><a th:href="@{/sort/{name}(name=category)}">カテゴリー</a></th>
+			<th><a th:href="@{/sort/{name}(name=price)}">値段</a></th>
 			<th>編集</th>
 			<th>削除</th>
 		</tr>
