@@ -17,20 +17,31 @@ import com.example.demo.db.GoodsDao;
 
 public class GoodsController {
 	private final GoodsDao goodsdao;
-
+	private String sort="name";
+	private String sortName="";
+	private Boolean sortOrder=false;
 	@Autowired
 	public GoodsController(GoodsDao goodsdao) {
-
+		sort="id ASC";
 		this.goodsdao=goodsdao;
 	}
     @RequestMapping("/index")
     public String top(Model model, Form form) {
         model.addAttribute("title", "商品管理ページ");
-        List<Goods> list = goodsdao.searchDb();
+        List<Goods> list = goodsdao.sortDb(sort);
         model.addAttribute("dbList", list);
         return "index";
     }
-
+    
+    @RequestMapping("/sort/{name}")
+    public String sortIndex(@PathVariable String name) {
+    	if(sortName.equals(name))sortOrder=!sortOrder;
+    	else sortOrder=true;
+    	sortName=name;
+    	sort=sortName+(sortOrder?" ASC":" DESC");
+    	
+    	return "redirect:/index";
+    }
 	//確認
 	@RequestMapping("/complete")
 	public String complete(Model model, Form form) {
