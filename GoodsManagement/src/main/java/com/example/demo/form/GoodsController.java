@@ -110,54 +110,54 @@ public class GoodsController {
 		goodsdao.deleteDb(id);
 		return "redirect:/index";
 	}
-	
+
 	//確認
-		@RequestMapping("/complete/category")
-		public String completecategory(Model model, Form form) {
-			model.addAttribute("title", "登録完了ページ");
-			Category category = new Category();
-			category.setName(form.getName());
-			categorydao.insertDb(category);
-			return "category/complete";
+	@RequestMapping("/complete/category")
+	public String completecategory(Model model, Form form) {
+		model.addAttribute("title", "登録完了ページ");
+		Category category = new Category();
+		category.setName(form.getName());
+		categorydao.insertDb(category);
+		return "category/complete";
+	}
+
+	//確認画面
+	@RequestMapping("/confirm/category")
+	public String confirmcategory(@Validated Form form, BindingResult result, Model model) {
+
+		//失敗確認
+		if (result.hasErrors()) {
+			model.addAttribute("title", "入力ページ");
+			//データベースから取得
+			List<Category> list = categorydao.searchDb();
+
+			//データベースに格納
+			model.addAttribute("dbList", list);
+			return "index";
 		}
+		model.addAttribute("title", "confirm");
+		return "category/confirm";
+	}
 
-		//確認画面
-		@RequestMapping("/confirm/category")
-		public String confirmcategory(@Validated Form form, BindingResult result, Model model) {
+	@RequestMapping("/edit/category/{id}")
+	public String editcategory(@PathVariable Long id, Model model, Form form) {
+		Category category = categorydao.searchDbOne(id);
+		model.addAttribute("category", category);
+		return "category/edit";
+	}
 
-			//失敗確認
-			if (result.hasErrors()) {
-				model.addAttribute("title", "入力ページ");
-				//データベースから取得
-				List<Category> list = categorydao.searchDb();
+	@RequestMapping("/edit/category/{id}/exe")
+	public String editcategoryExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
+		Category category = new Category();
+		category.setName(form.getName());
+		categorydao.updateDb(id, category);
+		return "redirect:/index";
 
-				//データベースに格納
-				model.addAttribute("dbList", list);
-				return "index";
-			}
-			model.addAttribute("title", "confirm");
-			return "category/confirm";
-		}
+	}
 
-		@RequestMapping("/edit/category/{id}")
-		public String editcategory(@PathVariable Long id, Model model, Form form) {
-			Category category = categorydao.searchDbOne(id);
-			model.addAttribute("category", category);
-			return "category/edit";
-		}
-
-		@RequestMapping("/edit/category/{id}/exe")
-		public String editcategoryExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
-			Category category = new Category();
-			category.setName(form.getName());
-			categorydao.updateDb(id, category);
-			return "redirect:/index";
-
-		}
-
-		@RequestMapping("/delete/category/{id}")
-		public String deletecategory(@PathVariable Long id) {
-			categorydao.deleteDb(id);
-			return "redirect:/index";
-		}
+	@RequestMapping("/delete/category/{id}")
+	public String deletecategory(@PathVariable Long id) {
+		categorydao.deleteDb(id);
+		return "redirect:/index";
+	}
 }
