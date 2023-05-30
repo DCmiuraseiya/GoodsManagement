@@ -19,7 +19,7 @@ CREATE TABLE goods(
 --param
 --name:カテゴリーの名前
 
---CREATE TABLE category(
+CREATE TABLE category(
 	code CHAR(2) NOT NULL,
 	name VARCHAR(45) NOT NULL,
   	PRIMARY KEY (code)

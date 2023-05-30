@@ -91,13 +91,16 @@ public class GoodsController {
 
 		//失敗確認
 		if (result.hasErrors()) {
-			model.addAttribute("title", "入力ページ");
-			//データベースから取得
-			List<Goods> list = goodsdao.searchDb();
-
-			//データベースに格納
+			model.addAttribute("title", "商品管理ページ");
+			List<Goods> list = goodsdao.sortpageDb(sort, min);
+			
+			if(goodsdao.sortpageDb(sort, min).size()<goodsdao.MAX_CONTENTS) page = "end";
+			else if (min == 0) page="first";
+			else page="";
+			
 			model.addAttribute("dbList", list);
-			return "index";
+			model.addAttribute("page", page);
+			return "/index";
 		}
 		model.addAttribute("title", "confirm");
 		return "goods/confirm";
