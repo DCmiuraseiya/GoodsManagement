@@ -48,9 +48,9 @@ public class GoodsController {
 		model.addAttribute("title", "登録完了ページ");
 		Goods goods = new Goods();
 		goods.setName(form.getName());
-		goods.setStock(form.getStock());
+		goods.setStock(Integer.parseInt(form.getStock()));
 		goods.setCategory(form.getCategory());
-		goods.setPrice(form.getPrice());
+		goods.setPrice(Integer.parseInt(form.getPrice()));
 		goodsdao.insertDb(goods);
 		return "goods/complete";
 	}
@@ -68,7 +68,7 @@ public class GoodsController {
 			
 			//データベースに格納
 			model.addAttribute("dbList", list);
-			return "goods/input";
+			return "index";
 		}
 		model.addAttribute("title", "confirm");
 		return "goods/confirm";
@@ -84,10 +84,10 @@ public class GoodsController {
 	@RequestMapping("/edit/{id}/exe")
     public String editExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
         Goods goods = new Goods();
-        goods.setStock(form.getStock());
+        goods.setStock(Integer.parseInt(form.getStock()));
         goods.setName(form.getName());
         goods.setCategory(form.getCategory());
-        goods.setPrice(form.getPrice());
+        goods.setPrice(Integer.parseInt(form.getPrice()));
         goodsdao.updateDb(id, goods);
         return "redirect:/index";
 
