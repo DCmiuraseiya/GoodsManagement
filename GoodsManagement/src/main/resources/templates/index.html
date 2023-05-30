@@ -16,8 +16,15 @@
 		<p><input type="text" name="name" th:value="*{name}"></p>
 		<p>在庫数</p>
 		<p><input type="text" name="stock" th:value="*{stock}"></p>
-		<p>カテゴリー</p>
-		<p><input type="text" name="category" th:value="*{category}"></p>
+		<p>カテゴリー
+		<p>
+		<select name="category" required>
+		<option value="">選択してください</option>
+		<option value="カテゴリー1">カテゴリー1</option>
+		<option value="カテゴリー2">カテゴリー2</option>
+		<option value="カテゴリー3">カテゴリー3</option>
+		</select>
+		</p>
 		<p>値段</p>
 		<p><input type="text" name="price" th:value="*{price}"></p>
 		<input type="submit" value="送信">
