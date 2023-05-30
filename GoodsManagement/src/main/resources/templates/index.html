@@ -45,9 +45,7 @@
 				</form>
 			</td>
 			<td>
-				<form method="get" action="#" th:action="@{/delete/{id}(id=${res.id})}" onsubmit="confirmDelete()">
-					<input type="submit" value="削除">
-				</form>
+				<button type="submit" onclick="confirmDelete(event)" th:ids="${res.id}">削除</button>
 			</td>
 		</tr>
 	</table>

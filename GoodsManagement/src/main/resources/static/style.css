@@ -34,3 +34,18 @@ td input[type="submit"] {
 td input[type="submit"]:hover {
 	background-color: #45a049;
 }
+
+td button[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+td button[type="submit"]:hover {
+	background-color: #45a049;
+}

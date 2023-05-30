@@ -1,10 +1,8 @@
-function confirmDelete() {
-    var result = confirm("本当に削除しますか？");
+function confirmDelete(event) {
+    let result = confirm("本当に削除しますか？");
     if (result) {
-      // OKボタンがクリックされた場合の処理
-      // ここに削除の実行やリンク先へのリダイレクトなどを記述します
-    } else {
-      // キャンセルボタンがクリックされた場合の処理
-      // ここにキャンセル時の処理を記述します
+        // OKボタンがクリックされた場合の処理
+        let id = event.target.getAttribute("ids");
+        window.location = "./delete/" + id;
     }
-  }
+}
