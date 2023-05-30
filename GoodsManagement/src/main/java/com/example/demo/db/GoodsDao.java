@@ -23,12 +23,8 @@ public class GoodsDao {
 		db.update("DELETE FROM goods WHERE id = ?", id);
 	}
 
-  //SELCT処理
-	public List<Goods> searchDb(){
-
-
 	//SELCT処理
-	public List<Goods> serchDB() {
+	public List<Goods> searchDb() {
 
 		//取得
 		String sql = "SELECT * FROM goods;";
@@ -39,22 +35,22 @@ public class GoodsDao {
 		//1件ずつピックアップ
 		for (Map<String, Object> result : result_db) {
 
-			//データ1件分を1つのまとまりとしたEntForm型の「entformdb」を生成
+			//データ1件分を1つのまとまりとしたGoods型の「goods」を生成
 			Goods goods = new Goods();
 
-			//id、nameのデータをentformdbに移す
+			//id,name,stock,category,priceのデータをgoodsに移す
 			goods.setId((int) result.get("id"));
 			goods.setName((String) result.get("name"));
 			goods.setStock((int) result.get("stock"));
 			goods.setCategory((String) result.get("category"));
 			goods.setPrice((int) result.get("price"));
-			//移し替えたデータを持ったentformdbを、resultDB2に入れる
+			//移し替えたデータを持ったgoodsを、resultDB2に入れる
 			goodslist.add(goods);
 		}
 		return goodslist;
 	}
 
-	public Goods serchDbOne(Long id) {
+	public Goods searchDbOne(Long id) {
 		//取得
 		String sql = "SELECT * FROM goods WHERE id=" +id;
 
@@ -75,7 +71,7 @@ public class GoodsDao {
 	}
 
 	public void insertDb(Goods goods) {
-		db.update("INSERT INTO goods (name,stock,category,price) VALUES(?,?,?)",
+		db.update("INSERT INTO goods (name,stock,category,price) VALUES(?,?,?,?)",
 				goods.getName(),
 				goods.getStock(),
 				goods.getCategory(),
@@ -86,10 +82,10 @@ public class GoodsDao {
 		//コンソールに表示
 		System.out.println("編集の実行");
 
-		db.update("UPDATE goods SET name=?, stock=?, category=?, price=? WHERE id=?", goods.getName(), goods.getStock(), goods.getCategory(), goods.getPrice(), id);
-
-		db.update("UPDATE goods SET name=?, stock=?, categoly=?, price=? WHERE id=?", goods.getName(), goods.getStock(),
-				goods.getCategory(), goods.getPrice(), id);
-
+		db.update("UPDATE goods SET name=?, stock=?, category=?, price=? WHERE id=?", 
+				goods.getName(), 
+				goods.getStock(), 
+				goods.getCategory(), 
+				goods.getPrice(), id);
 	}
 }

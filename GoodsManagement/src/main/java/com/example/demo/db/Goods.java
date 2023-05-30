@@ -8,7 +8,11 @@ public class Goods {
     
     private int price;
 
-    public void setId(int id) {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
         this.id = id;
     }
 
