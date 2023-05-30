@@ -107,7 +107,7 @@ public class GoodsController {
 	}
 
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Long id, Model model, Form form) {
+	public String edit(@PathVariable Long id, Model model, @Validated Form form) {
 		Goods goods = goodsdao.searchDbOne(id);
 		model.addAttribute("goods", goods);
 		return "/goods/edit";
@@ -115,6 +115,11 @@ public class GoodsController {
 
 	@RequestMapping("/edit/{id}/exe")
 	public String editExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			Goods goods = goodsdao.searchDbOne(id);
+			model.addAttribute("goods", goods);
+			return "/goods/edit";
+		}
 		Goods goods = new Goods();
 		goods.setStock(Integer.parseInt(form.getStock()));
 		goods.setName(form.getName());
