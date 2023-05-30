@@ -39,3 +39,9 @@ INSERT INTO goods(name,stock,category,price) VALUES
 ('777sample',2525,'cccccccccc',5543),
 ('888sample',1000,'aaaaaaaaaa',21321),
 ('999sample',2000,'bbbbbbbbbb',133);
+
+INSERT INTO category (name) VALUES 
+( 'カテゴリー1'),
+( 'カテゴリー2'),
+( 'カテゴリー3'),
+( 'カテゴリー4');

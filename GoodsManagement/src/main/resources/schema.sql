@@ -20,8 +20,8 @@ CREATE TABLE goods(
 --name:カテゴリーの名前
 
 CREATE TABLE category(
-	code CHAR(2) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(45) NOT NULL,
-  	PRIMARY KEY (code)
+  	PRIMARY KEY (id)
  );
 
