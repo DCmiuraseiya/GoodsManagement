@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.db.Category;
+import com.example.demo.db.CategoryDao;
 import com.example.demo.db.Goods;
 import com.example.demo.db.GoodsDao;
 
@@ -17,19 +19,25 @@ import com.example.demo.db.GoodsDao;
 
 public class GoodsController {
 	private final GoodsDao goodsdao;
+	private final CategoryDao categorydao;
 	private String sort="name";
 	private String sortName="";
 	private Boolean sortOrder=false;
 	@Autowired
-	public GoodsController(GoodsDao goodsdao) {
+	public GoodsController(GoodsDao goodsdao,CategoryDao categorydao) {
 		sort="id ASC";
 		this.goodsdao=goodsdao;
+		this.categorydao = categorydao;
 	}
     @RequestMapping("/index")
     public String top(Model model, Form form) {
         model.addAttribute("title", "商品管理ページ");
         List<Goods> list = goodsdao.sortDb(sort);
         model.addAttribute("dbList", list);
+        List<Category> categorylist = categorydao.searchDb();
+        model.addAttribute("categoryList", categorylist);
+        //プルダウンの初期値を設定する場合は指定
+        //model.addAttribute("selectedValue", "01");
         return "index";
     }
     

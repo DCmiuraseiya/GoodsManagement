@@ -16,7 +16,6 @@
 		<p><input type="text" name="name" th:value="*{name}"></p>
 		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
 		<p>在庫数</p>
-		<p><input type="text" name="stock" th:value="*{stock}"></p>
 		<p><input type="number" name="stock" th:value="*{stock}"></p>
 		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
 		<p>カテゴリー</p>
