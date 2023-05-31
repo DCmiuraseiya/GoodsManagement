@@ -140,6 +140,7 @@ body {
 #confirm_complete input[type="submit"]:hover {
 	background-color: #1b9f21;
 }
+
 /* 編集ページ */
 #edit_list {
 	max-width: 400px;
@@ -148,10 +149,6 @@ body {
 
 #edit_list form {
 	margin-bottom: 20px;
-}
-
-#edit_list p {
-	margin-bottom: 10px;
 }
 
 #edit_list input[type="text"],
@@ -173,4 +170,73 @@ body {
 	font-size: 16px;
 	border-radius: 4px;
 	cursor: pointer;
+}
+
+/* カテゴリー一覧ページ */
+#category_list {
+	border-collapse: collapse;
+}
+
+#category_list th,
+#category_list td {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+#category_list th {
+	text-align: left;
+	/* background-color: #f2f2f2; */
+}
+
+#category_list tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+#category_list tr:nth-child(odd) {
+	background-color: #d0f4fa;
+}
+
+#category_list input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#confirm_index input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+.category_input input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+	transition-duration: 0.4s;
+}
+
+.category_input input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+/* ボタン */
+a {
+	font-weight: bold;
+	display: inline-block;
+	transition: .3s;
+	transform: scale(1);
+}
+
+a:hover {
+	font-weight: bold;
+	transform: scale(1.05);
+	color: #f89174;
+	/*文字色*/
 }

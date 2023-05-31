@@ -28,11 +28,9 @@
 					<th>カテゴリー</th>
 					<td>
 						<select class="select" style="width: 200px;" name="category" th:value="*{category}" required>
-							<option 
-							th:each="category : ${categoryList}" 
-							th:value="${category.name}"
-							th:text="${category.name}" 
-							th:selected="${category.name == selectedValue}">
+							<option value="">選択してください</option>
+							<option th:each="category : ${categoryList}" th:value="${category.name}"
+								th:text="${category.name}" th:selected="${category.name == selectedValue}">
 							</option>
 						</select>
 					</td>
