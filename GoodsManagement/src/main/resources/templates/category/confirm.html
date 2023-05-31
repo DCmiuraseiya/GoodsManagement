@@ -19,7 +19,9 @@
 	</form>
 	
 	<div th:object="${form}">
+
 		<p>入力内容ここまで</p>
+
 
 		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
 		<!--		hiddenなので見えないけどデータを送っている-->
@@ -28,7 +30,9 @@
 			<input type="hidden" name="stock" th:value="*{stock}">
 			<input type="hidden" name="category" th:value="*{category}">
 			<input type="hidden" name="price" th:value="*{price}">
+
 			<input type="submit" value="入力画面へ">
+			<input type="submit" value="一覧へ">
 		</form>
 
 		<!--		確認画面にデータを送る処理-->

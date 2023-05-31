@@ -79,6 +79,7 @@ public class CategoryDao {
 			
 		}
 
+
 		//移し替えたデータを持ったentformdbを、resultDB2に入れる
 		return category;
 	}

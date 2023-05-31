@@ -84,11 +84,14 @@ public class GoodsController {
 		//失敗確認
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
-			//データベースから取得
+			//商品データベースから取得
 			List<Goods> list = goodsdao.searchDb();
-
-			//データベースに格納
+			//カテゴリーデータベースから取得
+			List<Category> categorylist = categorydao.searchDb();
+			//商品データベースに格納
 			model.addAttribute("dbList", list);
+			//カテゴリデータベースに格納
+			model.addAttribute("categoryList", categorylist);
 			return "index";
 		}
 		model.addAttribute("title", "confirm");
@@ -146,6 +149,7 @@ public class GoodsController {
 
 			//データベースに格納
 			model.addAttribute("dbList", list);
+
 			return "index";
 		}
 		model.addAttribute("title", "confirm");

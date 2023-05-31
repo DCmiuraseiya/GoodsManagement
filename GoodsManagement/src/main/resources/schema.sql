@@ -18,6 +18,7 @@ CREATE TABLE goods(
 --商品のカテゴリーテーブル
 --param
 --name:カテゴリーの名前
+
 CREATE TABLE category(
 	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(45) NOT NULL,
