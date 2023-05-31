@@ -5,13 +5,14 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" th:href="@{/style.css}">
 	<title>GoodsManagement</title>
+	<!--select2用 css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
 </head>
 
 <body>
 	<h1 th:text="${title}"></h1>
 
 	<h2>入力</h2>
-
 	<h3>
 		<form method="get" action="#" th:action="@{/confirm}" th:object="${form}">
 			<table id="goods_form">
@@ -26,15 +27,14 @@
 				<tr>
 					<th>カテゴリー</th>
 					<td>
-						<select name="category"required>
-            				<option value="">選択してください</option>
-            				<option
-                				th:each="category : ${categoryList}"
-                				th:value="${category.name}"
-                				th:text="${category.name}"
-                				th:selected="${category.name == selectedValue}">
-            				</option>
-        				</select ></td>
+						<select class="select" style="width: 200px;" name="category" th:value="*{category}" required>
+            <option
+                th:each="category : ${categoryList}"
+                th:value="${category.name}"
+                th:text="${category.name}"
+                th:selected="${category.name == selectedValue}">
+            </option>
+        </select ></td>
 				</tr>
 				<tr>
 					<th>値段</th>
@@ -86,5 +86,11 @@
 	<a th:if="${page != 'end'}" th:href="@{/page/{change}(change=10)}">次</a>
 	<script th:src="@{/style.js}"></script>
 </body>
+<!--select2用 jquery 3/3-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>!
+<!--select2用 js-->
+<script src="select2.js"></script>
 
 </html>

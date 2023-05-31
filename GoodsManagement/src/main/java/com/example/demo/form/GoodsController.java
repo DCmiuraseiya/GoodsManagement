@@ -44,8 +44,9 @@ public class GoodsController {
 		if(goodsdao.sortpageDb(sort, min).size()<goodsdao.MAX_CONTENTS) page = "end";
 		else if (min == 0) page="first";
 		else page="";
-		
 		model.addAttribute("dbList", list);
+
+		//カテゴリテーブルからカテゴリリスト取得
 		List<Category> categorylist = categorydao.searchDb();
 		model.addAttribute("categoryList", categorylist);
 		model.addAttribute("page", page);
@@ -93,14 +94,14 @@ public class GoodsController {
 		goods.setCategory(form.getCategory());
 		goods.setPrice(Integer.parseInt(form.getPrice()));
 		goodsdao.insertDb(goods);
-		
+
 		//カテゴリテーブルに今回選択したカテゴリがあるかチェックして無い場合INSERT
-		if(categorydao.searchDbOne(form.getCategory()) == null) {
+		if (categorydao.searchDbOne(form.getCategory()) == null) {
 			Category c = new Category();
 			c.setName(form.getCategory());
 			categorydao.insertDb(c);
 		}
-		
+
 		return "goods/complete";
 	}
 
@@ -166,7 +167,7 @@ public class GoodsController {
 	//////////////////////////////////////////////////////////////////////////
 	//							カテゴリ処理								//
 	//////////////////////////////////////////////////////////////////////////
-	
+
 	//確認
 	@RequestMapping("/complete/category")
 	public String completecategory(Model model, Form form) {
@@ -184,8 +185,15 @@ public class GoodsController {
 		//失敗確認
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
-			//データベースから取得
-			List<Category> list = categorydao.searchDb();
+
+			//商品データベースから取得
+			List<Goods> list = goodsdao.searchDb();
+			//カテゴリーデータベースから取得
+			List<Category> categorylist = categorydao.searchDb();
+			//商品データベースに格納
+			model.addAttribute("dbList", list);
+			//カテゴリデータベースに格納
+			model.addAttribute("categoryList", categorylist);
 
 			//データベースに格納
 			model.addAttribute("dbList", list);
@@ -197,7 +205,7 @@ public class GoodsController {
 		model.addAttribute("categoryList", categorylist);
 		return "category/confirm";
 	}
-	
+
 	//編集処理
 	@RequestMapping("/edit/category/{id}")
 	public String editcategory(@PathVariable Long id, Model model, Form form) {
@@ -205,7 +213,7 @@ public class GoodsController {
 		model.addAttribute("category", category);
 		return "category/edit";
 	}
-	
+
 	//更新処理
 	@RequestMapping("/edit/category/{id}/exe")
 	public String editcategoryExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
@@ -215,24 +223,11 @@ public class GoodsController {
 		return "redirect:/confirm/category";
 
 	}
-	
+
 	//削除処理
 	@RequestMapping("/delete/category/{id}")
 	public String deletecategory(@PathVariable Long id) {
 		categorydao.deleteDb(id);
 		return "redirect:/confirm/category";
 	}
-	
-	//編集処理
-		@RequestMapping("test")
-		public String editcategory( Model model, Form form) {
-			model.addAttribute("title", "商品管理ページ");
-			List<Goods> list = goodsdao.sortDb(sort);
-			model.addAttribute("dbList", list);
-			List<Category> categorylist = categorydao.searchDb();
-			model.addAttribute("categoryList", categorylist);
-			//TODO:カテゴリテーブルからの値を入れてselectに挿入
-			return "category/test";
-		}
-	
 }
