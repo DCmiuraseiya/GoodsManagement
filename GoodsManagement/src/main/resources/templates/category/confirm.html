@@ -8,52 +8,50 @@
 
 <body>
 	<h1><span th:text="${title}"></span></h1>
+	<h3>
+		<table>
+			<tr>
+				<th>カテゴリー</a></th>
+				<th>編集</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="category : ${categoryList}">
+				<td th:text="${category.name}"></td>
+				<td>
+					<form method="get" action="#" th:action="@{/edit/category/{id}(id=${category.id})}">
+						<input type="submit" value="編集">
+					</form>
+				</td>
+				<td>
+					<form method="get" action="#" th:action="@{/delete/category/{id}(id=${category.id})}">
+						<input type="submit" value="削除">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</h3>
 
-	<table>
-		<tr>
-			<!-- <th>id</th> -->
-			<th>カテゴリー</a></th>
-			<th>編集</th>
-			<th>削除</th>
-		</tr>
-		<tr th:each="category : ${categoryList}">
-			<!-- <td th:text="${res.id}"></td> -->
-			<td th:text="${category.name}"></td>
-			<td>
-				<form method="get" action="#" th:action="@{/edit/category/{id}(id=${category.id})}">
-					<input type="submit" value="編集">
-				</form>
-			</td>
-			<td>
-				<form method="get" action="#" th:action="@{/delete/category/{id}(id=${category.id})}">
-					<input type="submit" value="削除">
-				</form>
-			</td>
-		</tr>
-	</table>
+	<h2>カテゴリー入力</h2>
+	<h3>
+		<form method="get" action="#" th:action="@{/complete/category}" th:object="${form}">
+			<p>カテゴリー名</p>
+			<p><input type="text" name="name" th:value="*{name}"></p>
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
+			<input type="submit" value="カテゴリー追加">
+		</form>
+	</h3>
 
 	<div th:object="${form}">
-
-
-
-		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
-		<!--		hiddenなので見えないけどデータを送っている-->
+		<!--formにデータを送る処理（入力画面に戻る再記入用）-->
+		<!--hiddenなので見えないけどデータを送っている-->
 		<form method="get" action="#" th:action="@{/index}">
 			<input type="hidden" name="name" th:value="*{name}">
 			<input type="hidden" name="stock" th:value="*{stock}">
 			<input type="hidden" name="category" th:value="*{category}">
 			<input type="hidden" name="price" th:value="*{price}">
 
-			<input type="submit" value="入力画面へ">
-			<input type="submit" value="一覧へ">
+			<input type="submit" value="商品管理画面へ">
 		</form>
-
-		<!--		確認画面にデータを送る処理-->
-		<!--<form method="get" action="#" th:action="@{/complete/category}">
-			<input type="hidden" name="name" th:value="*{name}">
-			<input type="submit" value="完了画面へ">
-		</form>-->
-
 	</div>
 
 </body>
