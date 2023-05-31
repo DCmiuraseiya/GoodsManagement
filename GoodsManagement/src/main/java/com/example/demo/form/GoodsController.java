@@ -59,12 +59,21 @@ public class GoodsController {
 	@RequestMapping("/complete")
 	public String complete(Model model, Form form) {
 		model.addAttribute("title", "登録完了ページ");
+		//goodsテーブルに今回選択したものをINSERT
 		Goods goods = new Goods();
 		goods.setName(form.getName());
 		goods.setStock(Integer.parseInt(form.getStock()));
 		goods.setCategory(form.getCategory());
 		goods.setPrice(Integer.parseInt(form.getPrice()));
 		goodsdao.insertDb(goods);
+		
+		//カテゴリテーブルに今回選択したカテゴリがあるかチェックして無い場合INSERT
+		if(categorydao.searchDbOne(form.getCategory()) == null) {
+			Category c = new Category();
+			c.setName(form.getCategory());
+			categorydao.insertDb(c);
+		}
+		
 		return "goods/complete";
 	}
 
@@ -135,14 +144,12 @@ public class GoodsController {
 		//失敗確認
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
-			//商品データベースから取得
-			List<Goods> list = goodsdao.searchDb();
-			//カテゴリーデータベースから取得
-			List<Category> categorylist = categorydao.searchDb();
-			//商品データベースに格納
+			//データベースから取得
+			List<Category> list = categorydao.searchDb();
+
+			//データベースに格納
 			model.addAttribute("dbList", list);
-			//カテゴリデータベースに格納
-			model.addAttribute("categoryList", categorylist);
+
 			return "index";
 		}
 		model.addAttribute("title", "confirm");
@@ -173,4 +180,17 @@ public class GoodsController {
 		categorydao.deleteDb(id);
 		return "redirect:/index";
 	}
+	
+	//編集処理
+		@RequestMapping("test")
+		public String editcategory( Model model, Form form) {
+			model.addAttribute("title", "商品管理ページ");
+			List<Goods> list = goodsdao.sortDb(sort);
+			model.addAttribute("dbList", list);
+			List<Category> categorylist = categorydao.searchDb();
+			model.addAttribute("categoryList", categorylist);
+			//TODO:カテゴリテーブルからの値を入れてselectに挿入
+			return "category/test";
+		}
+	
 }
