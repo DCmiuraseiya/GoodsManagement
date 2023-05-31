@@ -37,7 +37,7 @@ public class GoodsController {
 		//goodsテーブルから各column情報取得
 		List<Goods> list = goodsdao.sortDb(sort);
 		model.addAttribute("dbList", list);
-		
+
 		//カテゴリテーブルからカテゴリリスト取得
 		List<Category> categorylist = categorydao.searchDb();
 		model.addAttribute("categoryList", categorylist);
@@ -147,6 +147,7 @@ public class GoodsController {
 		//失敗確認
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
+
 			//商品データベースから取得
 			List<Goods> list = goodsdao.searchDb();
 			//カテゴリーデータベースから取得
@@ -155,6 +156,10 @@ public class GoodsController {
 			model.addAttribute("dbList", list);
 			//カテゴリデータベースに格納
 			model.addAttribute("categoryList", categorylist);
+
+			//データベースに格納
+			model.addAttribute("dbList", list);
+
 			return "index";
 		}
 		model.addAttribute("title", "confirm");
@@ -185,17 +190,4 @@ public class GoodsController {
 		categorydao.deleteDb(id);
 		return "redirect:/index";
 	}
-
-	//編集処理
-	@RequestMapping("test")
-	public String editcategory(Model model, Form form) {
-		model.addAttribute("title", "商品管理ページ");
-		List<Goods> list = goodsdao.sortDb(sort);
-		model.addAttribute("dbList", list);
-		List<Category> categorylist = categorydao.searchDb();
-		model.addAttribute("categoryList", categorylist);
-		//TODO:カテゴリテーブルからの値を入れてselectに挿入
-		return "category/test";
-	}
-
 }

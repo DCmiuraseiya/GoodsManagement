@@ -8,16 +8,20 @@
 
 <body>
 	<h1><span th:text="${title}"></span></h1>
-		<p>カテゴリー追加</p>
+		<p>入力内容ここから</p>
+		<p>カテゴリー</p>
 	 <form method="get" action="#" th:action="@{/complete/category}"th:object="${form}">
 
-		<p>カテゴリー名</p>
+		<p>商品名</p>
 		<p><input type="text" name="name" th:value="*{name}"></p>
 		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
 		<input type="submit" value="送信">
 	</form>
 	
 	<div th:object="${form}">
+
+		<p>入力内容ここまで</p>
+
 
 		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
 		<!--		hiddenなので見えないけどデータを送っている-->
@@ -26,6 +30,8 @@
 			<input type="hidden" name="stock" th:value="*{stock}">
 			<input type="hidden" name="category" th:value="*{category}">
 			<input type="hidden" name="price" th:value="*{price}">
+
+			<input type="submit" value="入力画面へ">
 			<input type="submit" value="一覧へ">
 		</form>
 

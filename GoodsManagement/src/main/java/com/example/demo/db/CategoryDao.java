@@ -78,7 +78,6 @@ public class CategoryDao {
 			category.setName((String) result_db.get(0).get("name"));
 
 		}
-
 		//移し替えたデータを持ったentformdbを、resultDB2に入れる
 		return category;
 	}

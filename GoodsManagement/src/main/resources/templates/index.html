@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>GoodsManagement</title>
+	<!--TODO:衝突が発生する場合個々の処理を残す1/3-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
 </head>
 
@@ -20,6 +21,7 @@
 		<p><input type="number" name="stock" th:value="*{stock}"></p>
 		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
 		<p>カテゴリー</p>
+		<!--TODO:衝突が発生する場合個々の処理を残す(スタイルは適当なので...)2/3-->
 		<select class="select" style="width: 200px;" name="category" th:value="*{category}" required>
             <option value="">選択してください</option>
             <option
@@ -71,6 +73,7 @@
 	<a th:if="${page != 'end'}" th:href="@{/page/{change}(change=10)}">次</a>
 
 </body>
+<!--TODO:衝突が発生する場合個々の処理を残す3/3-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
