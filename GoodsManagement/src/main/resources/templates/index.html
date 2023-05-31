@@ -28,7 +28,7 @@
                 th:selected="${category.name == selectedValue}">
             </option>
         </select >
-        <a href="/confirm/category" class="btn">ボタン</a>
+        <a href="/confirm/category" class="btn">カテゴリー編集</a>
 		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
 		<p>値段</p>
 		<p><input type="number" name="price" th:value="*{price}"></p>

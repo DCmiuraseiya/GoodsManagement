@@ -145,7 +145,9 @@ public class GoodsController {
 			model.addAttribute("categoryList", categorylist);
 			return "index";
 		}
-		model.addAttribute("title", "confirm");
+		model.addAttribute("title", "カテゴリー一覧");
+		List<Category> categorylist = categorydao.searchDb();
+		model.addAttribute("categoryList", categorylist);
 		return "category/confirm";
 	}
 	
@@ -163,7 +165,7 @@ public class GoodsController {
 		Category category = new Category();
 		category.setName(form.getName());
 		categorydao.updateDb(id, category);
-		return "redirect:/index";
+		return "redirect:/confirm/category";
 
 	}
 	
@@ -171,6 +173,6 @@ public class GoodsController {
 	@RequestMapping("/delete/category/{id}")
 	public String deletecategory(@PathVariable Long id) {
 		categorydao.deleteDb(id);
-		return "redirect:/index";
+		return "redirect:/confirm/category";
 	}
 }

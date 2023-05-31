@@ -8,15 +8,28 @@
 
 <body>
 	<h1><span th:text="${title}"></span></h1>
-		<p>カテゴリー追加</p>
-	 <form method="get" action="#" th:action="@{/complete/category}"th:object="${form}">
-
-		<p>カテゴリー名</p>
-		<p><input type="text" name="name" th:value="*{name}"></p>
-		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
-		<input type="submit" value="送信">
-	</form>
-	
+	<table>
+		<tr>
+			<!-- <th>id</th> -->
+			<th>カテゴリー</a></th>
+			<th>編集</th>
+			<th>削除</th>
+		</tr>
+		<tr th:each="category : ${categoryList}">
+			<!-- <td th:text="${res.id}"></td> -->
+			<td th:text="${category.name}"></td>
+			<td>
+				<form method="get" action="#" th:action="@{/edit/category/{id}(id=${category.id})}">
+					<input type="submit" value="編集">
+				</form>
+			</td>
+			<td>
+				<form method="get" action="#" th:action="@{/delete/category/{id}(id=${category.id})}">
+					<input type="submit" value="削除">
+				</form>
+			</td>
+		</tr>
+	</table>
 	<div th:object="${form}">
 
 		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
