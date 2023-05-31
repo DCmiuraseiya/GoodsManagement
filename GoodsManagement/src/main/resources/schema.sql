@@ -1,15 +1,3 @@
---商品のカテゴリーテーブル
---param
---id:商品テーブルcategory_idとリンクするkey
---name:カテゴリーの名前
-
---CREATE TABLE category(
---	id INT NOT NULL AUTO_INCREMENT,
---	name VARCHAR(100) NOT NULL,
---	PRIMARY KEY(id)
---);
-
-
 --***商品テーブル***--
 --param
 --name:商品名
@@ -27,5 +15,13 @@ CREATE TABLE goods(
 	PRIMARY KEY(id)
 	--FOREIGN KEY (category_id) REFERENCES category(id)
 );
+--商品のカテゴリーテーブル
+--param
+--name:カテゴリーの名前
 
+CREATE TABLE category(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(45) NOT NULL,
+  	PRIMARY KEY (id)
+ );
 

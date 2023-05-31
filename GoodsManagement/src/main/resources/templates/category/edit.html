@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>GoodsManagement</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+	<h1 th:text="${title}"></h1>
+	<div th:object="${category}">
+		<form action="#" method="get" th:action="@{/edit/category/__*{id}__/exe}">
+			<p>
+				番号:<span th:text="*{id}"></span> <input type="hidden" name="id" th:value="*{id}">
+			</p>
+			<p>
+				カテゴリ: <input type="text" name="name" th:value="*{name}">
+			</p>
+			<input type="submit" value="OK">
+		</form>
+	</div>
+</body>
+
+</html>

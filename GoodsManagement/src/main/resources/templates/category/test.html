@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>GoodsManagement</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
+</head>
+
+<body>
+	<h1><span th:text="${title}"></span></h1>
+
+	<h2>入力</h2>
+	<form method="get" action="#" th:action="@{/confirm}" th:object="${form}">
+
+		<p>商品名</p>
+		<p><input type="text" name="name" th:value="*{name}"></p>
+		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
+		<p>在庫数</p>
+		<p><input type="number" name="stock" th:value="*{stock}"></p>
+		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
+		<p>カテゴリー</p>
+		<p>
+			 <select class="select" style="width: 200px;" name="category" th:value="*{category}">
+    			<option value="Qumeru1">Qumeru1</option>
+    			<option value="Qumeru2">Qumeru2</option>
+    			<option value="Qumeru3">Qumeru3</option>
+    			<option value="Qumeru4">Qumeru4</option>
+    			<option value="Qumeru5">Qumeru5</option>
+  			</select>
+			<a href="/confirm/category" class="btn">ボタン</a>
+		</p>
+		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
+		<p>値段</p>
+		<p><input type="number" name="price" th:value="*{price}"></p>
+		<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
+		<input type="submit" value="送信">
+	</form>
+
+	<h2>商品一覧</h2>
+	<table>
+		<tr>
+			<!-- <th>id</th> -->
+			<th><a th:href="@{/sort/{name}(name=name)}"> 商品名</a></th>
+			<th><a th:href="@{/sort/{name}(name=stock)}">在庫数</a></th>
+			<th><a th:href="@{/sort/{name}(name=category)}">カテゴリー</a></th>
+			<th><a th:href="@{/sort/{name}(name=price)}">値段</a></th>
+			<th>編集</th>
+			<th>削除</th>
+		</tr>
+		<tr th:each="res: ${dbList}">
+			<!-- <td th:text="${res.id}"></td> -->
+			<td th:text="${res.name}"></td>
+			<td th:text="${res.stock}"></td>
+			<td th:text="${res.category}"></td>
+			<td th:text="${res.price}"></td>
+			<td>
+				<form method="get" action="#" th:action="@{/edit/{id}(id=${res.id})}">
+					<input type="submit" value="編集">
+				</form>
+			</td>
+			<td>
+				<form method="get" action="#" th:action="@{/delete/{id}(id=${res.id})}">
+					<input type="submit" value="削除">
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="select2.js"></script>
+
+</html>

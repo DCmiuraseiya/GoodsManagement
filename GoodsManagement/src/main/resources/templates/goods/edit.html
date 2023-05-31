@@ -16,6 +16,7 @@
 				<tr>
 					<th>商品名</th>
 					<td><input type="text" id="name" name="name" th:value="*{name}"></td>
+         
 				</tr>
 				<tr>
 					<th>在庫数</th>
@@ -35,25 +36,12 @@
 					</td>
 				</tr>
 			</table>
+      <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
+      <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
 		</form>
 	</h3>
-	<!-- <div th:object="${goods}" id="edit_list">
-		<form action="#" method="get" th:action="@{/edit/__*{id}__/exe}">
-			<p>
-				商品名: <input type="text" name="name" th:value="*{name}">
-			</p>
-			<p>
-				在庫数: <input type="number" name="priority" th:value="*{stock}">
-			</p>
-			<p>
-				カテゴリー: <input type="text" name="category" th:value="*{category}">
-			</p>
-			<p>
-				値段: <input type="text" name="price" th:value="*{price}">
-			</p>
-			<input type="submit" value="更新">
-		</form>
-	</div> -->
 </body>
 
 </html>
