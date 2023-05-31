@@ -22,36 +22,37 @@
 				</tr>
 				<tr>
 					<th>在庫数</th>
-					<td><input type="text" id="stock" name="stock" th:value="*{stock}"></td>
+					<td><input type="number" id="stock" name="stock" th:value="*{stock}"></td>
 				</tr>
 				<tr>
 					<th>カテゴリー</th>
 					<td>
 						<select class="select" style="width: 200px;" name="category" th:value="*{category}" required>
-            <option
-                th:each="category : ${categoryList}"
-                th:value="${category.name}"
-                th:text="${category.name}"
-                th:selected="${category.name == selectedValue}">
-            </option>
-        </select ></td>
+							<option 
+							th:each="category : ${categoryList}" 
+							th:value="${category.name}"
+							th:text="${category.name}" 
+							th:selected="${category.name == selectedValue}">
+							</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th>値段</th>
-					<td><input type="text" id="price" name="price" th:value="*{price}"></td>
+					<td><input type="number" id="price" name="price" th:value="*{price}"></td>
 				</tr>
 				<tr>
 					<td>
 						<input type="submit" value="登録">
 						<input type="reset" value="リセッﾄ">
-            <a href="/confirm/category" class="btn">カテゴリー登録ページへ</a>
+						<a href="/confirm/category" class="btn">カテゴリー登録ページへ</a>
 					</td>
 				</tr>
 			</table>
-      <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
-      <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
-		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
- 　   <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
+			<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
 		</form>
 	</h3>
 
@@ -59,10 +60,10 @@
 	<h2>
 		<table id="goods_list">
 			<tr>
-			<th><a th:href="@{/sort/{name}(name=name)}"> 商品名</a></th>
-			<th><a th:href="@{/sort/{name}(name=stock)}">在庫数</a></th>
-			<th><a th:href="@{/sort/{name}(name=category)}">カテゴリー</a></th>
-			<th><a th:href="@{/sort/{name}(name=price)}">値段</a></th>
+				<th><a th:href="@{/sort/{name}(name=name)}"> 商品名</a></th>
+				<th><a th:href="@{/sort/{name}(name=stock)}">在庫数</a></th>
+				<th><a th:href="@{/sort/{name}(name=category)}">カテゴリー</a></th>
+				<th><a th:href="@{/sort/{name}(name=price)}">値段</a></th>
 				<th>編集</th>
 				<th>削除</th>
 			</tr>
@@ -82,7 +83,7 @@
 			</tr>
 		</table>
 	</h2>
-  <a th:if="${page != 'first'}" th:href="@{/page/{change}(change=-10)}">前</a>
+	<a th:if="${page != 'first'}" th:href="@{/page/{change}(change=-10)}">前</a>
 	<a th:if="${page != 'end'}" th:href="@{/page/{change}(change=10)}">次</a>
 	<script th:src="@{/style.js}"></script>
 </body>
