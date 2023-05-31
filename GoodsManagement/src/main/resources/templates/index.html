@@ -25,7 +25,16 @@
 				</tr>
 				<tr>
 					<th>カテゴリー</th>
-					<td><input type="text" id="category" name="category" th:value="*{category}"></td>
+					<td>
+						<select name="category"required>
+            				<option value="">選択してください</option>
+            				<option
+                				th:each="category : ${categoryList}"
+                				th:value="${category.name}"
+                				th:text="${category.name}"
+                				th:selected="${category.name == selectedValue}">
+            				</option>
+        				</select ></td>
 				</tr>
 				<tr>
 					<th>値段</th>
