@@ -21,7 +21,15 @@
 		<p>カテゴリー</p>
 
 		<p>
-			<input type="text" name="category" th:value="*{category}">
+			<select name="category"required>
+            	<option value="">選択してください</option>
+            	<option
+                	th:each="category : ${categoryList}"
+                	th:value="${category.name}"
+                	th:text="${category.name}"
+                	th:selected="${category.name == selectedValue}">
+            	</option>
+        	</select >
 			<a href="/confirm/category" class="btn">ボタン</a>
 		</p>
 
