@@ -11,21 +11,15 @@
 	<h1 th:text="${title}"></h1>
 	<div th:object="${goods}">
 		<form action="#" method="get" th:action="@{/edit/__*{id}__/exe}">
-			<p>
-				番号:<span th:text="*{id}"></span> <input type="hidden" name="id" th:value="*{id}">
-			</p>
-			<p>
-				商品名: <input type="text" name="name" th:value="*{name}">
-			</p>
-			<p>
-				在庫数: <input type="number" name="priority" th:value="*{stock}">
-			</p>
-			<p>
-				カテゴリー: <input type="text" name="category" th:value="*{category}">
-			</p>
-			<p>
-				値段: <input type="text" name="price" th:value="*{price}">
-			</p>
+			<p>番号:<span th:text="*{id}"></span> <input type="hidden" name="id" th:value="*{id}"></p>
+			<p>商品名: <input type="text" name="name" th:value="*{name}"></p>
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">エラーメッセージ</div>
+			<p>在庫数: <input type="number" name="stock" th:value="*{stock}"></p>
+			<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
+			<p>カテゴリー: <input type="text" name="category" th:value="*{category}"></p>
+			<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
+			<p>値段: <input type="number" name="price" th:value="*{price}"></p>
+			<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">エラーメッセージ</div>
 			<input type="submit" value="更新">
 		</form>
 	</div>

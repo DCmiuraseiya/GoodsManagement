@@ -64,6 +64,10 @@
 			</td>
 		</tr>
 	</table>
+
+	<a th:if="${page != 'first'}" th:href="@{/page/{change}(change=-10)}">前</a>
+	<a th:if="${page != 'end'}" th:href="@{/page/{change}(change=10)}">次</a>
+
 </body>
 
 </html>
