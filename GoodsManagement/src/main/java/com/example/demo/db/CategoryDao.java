@@ -71,12 +71,12 @@ public class CategoryDao {
 		//1件ずつピックアップ
 		//データ1件分を1つのまとまりとしたEntForm型の「entformdb」を生成
 		Category category = null;
-		if(!result_db.isEmpty()) {
-			category = new Category(); 
+		if (!result_db.isEmpty()) {
+			category = new Category();
 			//id、nameのデータをentformdbに移す
 			category.setId((int) result_db.get(0).get("id"));
 			category.setName((String) result_db.get(0).get("name"));
-			
+
 		}
 
 		//移し替えたデータを持ったentformdbを、resultDB2に入れる

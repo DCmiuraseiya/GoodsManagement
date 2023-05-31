@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>GoodsManagement</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
 </head>
 
 <body>
@@ -19,10 +20,16 @@
 		<p><input type="number" name="stock" th:value="*{stock}"></p>
 		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
 		<p>カテゴリー</p>
-		<p>
-			<input type="text" name="category" th:value="*{category}">
-			<a href="/confirm/category" class="btn">ボタン</a>
-		</p>
+		<select class="select" style="width: 200px;" name="category" th:value="*{category}" required>
+            <option value="">選択してください</option>
+            <option
+                th:each="category : ${categoryList}"
+                th:value="${category.name}"
+                th:text="${category.name}"
+                th:selected="${category.name == selectedValue}">
+            </option>
+        </select >
+        <a href="/confirm/category" class="btn">ボタン</a>
 		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
 		<p>値段</p>
 		<p><input type="number" name="price" th:value="*{price}"></p>
@@ -59,6 +66,14 @@
 			</td>
 		</tr>
 	</table>
+
+	<a th:if="${page != 'first'}" th:href="@{/page/{change}(change=-10)}">前</a>
+	<a th:if="${page != 'end'}" th:href="@{/page/{change}(change=10)}">次</a>
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="select2.js"></script>
 
 </html>
