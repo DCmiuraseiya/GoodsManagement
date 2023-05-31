@@ -127,14 +127,15 @@ public class GoodsController {
 			model.addAttribute("categoryList", categorylist);
 			return "index";
 		}
-		model.addAttribute("title", "confirm");
+		model.addAttribute("title", "確認ページ");
 		return "goods/confirm";
 	}
 
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Long id, Model model, Form form) {
-		Goods goods = goodsdao.searchDbOne(id);
-		model.addAttribute("goods", goods);
+	public String edit(@PathVariable Long id,Model model,Form form) {
+		Goods goods=goodsdao.searchDbOne(id);
+		model.addAttribute("goods",goods);
+		model.addAttribute("title", "編集ページ");
 		return "/goods/edit";
 	}
 
