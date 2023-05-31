@@ -1,14 +1,176 @@
 @charset "UTF-8";
-table {
+
+/* 商品管理ページ */
+body {
+	font-family: Arial, sans-serif;
+	line-height: 1.4;
+	margin: 20px;
+	background-color: #caf5d5;
+}
+
+#goods_form input[type="reset"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#goods_form input:hover[type="reset"] {
+	background-color: #45a049;
+}
+
+#goods_form input[type="submit"] {
+	background-color: #66e66a;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#goods_form input:hover[type="submit"] {
+	background-color: #45a049;
+}
+
+#goods_list table {
+	width: 100%;
 	border-collapse: collapse;
 }
-table th {
-	background: #379ce8;
-	border: solid 1px #ccc;
-	color: #fff;
-	padding: 10px;
+
+#goods_list td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
-table td {
-	border: solid 1px #ccc;
-	padding: 10px;
+
+#goods_list th {
+	background-color: #f2f2f2;
+}
+
+#goods_list tr:hover {
+	background-color: #f5f5f5;
+}
+
+#goods_list td input[type="submit"] {
+	background-color: #393ce6;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#goods_list td input[type="submit"]:hover {
+	background-color: #2029ce;
+}
+
+#goods_list td button[type="submit"] {
+	background-color: #4caf9b;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#goods_list td button[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+#goods_list #confirm {
+	text-align: center;
+}
+
+/* 確認ページ */
+#confirm_list {
+	border-collapse: collapse;
+}
+
+#confirm_list th,
+#confirm_list td {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+#confirm_list th {
+	text-align: left;
+	/* background-color: #f2f2f2; */
+}
+
+#confirm_list tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+#confirm_list tr:nth-child(odd) {
+	background-color: #d0f4fa;
+}
+
+#confirm_index input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#confirm_index input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+#confirm_complete input[type="submit"] {
+	background-color: #28f12f;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#confirm_complete input[type="submit"]:hover {
+	background-color: #1b9f21;
+}
+/* 編集ページ */
+#edit_list {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+#edit_list form {
+	margin-bottom: 20px;
+}
+
+#edit_list p {
+	margin-bottom: 10px;
+}
+
+#edit_list input[type="text"],
+#edit_list input[type="number"] {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#edit_list input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 10px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
 }
