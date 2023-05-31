@@ -19,64 +19,28 @@ import com.example.demo.db.GoodsDao;
 
 public class GoodsController {
 	private final GoodsDao goodsdao;
-
 	private final CategoryDao categorydao;
-
 	private String sort = "name";
 	private String sortName = "";
 	private Boolean sortOrder = false;
-
-	private int min;
-	private String page;
 
 	@Autowired
 	public GoodsController(GoodsDao goodsdao, CategoryDao categorydao) {
 		sort = "id ASC";
 		this.goodsdao = goodsdao;
 		this.categorydao = categorydao;
-		min = 0;
-		page = "first";
-
 	}
 
 	@RequestMapping("/index")
 	public String top(Model model, Form form) {
 		model.addAttribute("title", "商品管理ページ");
-
-		List<Goods> list = goodsdao.sortpageDb(sort, min);
-
-		if (goodsdao.sortpageDb(sort, min).size() < goodsdao.MAX_CONTENTS)
-			page = "end";
-		else if (min == 0)
-			page = "first";
-		else
-			page = "";
-
+		List<Goods> list = goodsdao.sortDb(sort);
 		model.addAttribute("dbList", list);
-
 		List<Category> categorylist = categorydao.searchDb();
 		model.addAttribute("categoryList", categorylist);
 		//プルダウンの初期値を設定する場合は指定
 		//model.addAttribute("selectedValue", "01");
-
-		model.addAttribute("page", page);
 		return "index";
-	}
-
-	@RequestMapping("/page/{change}")
-	public String pageChange(@PathVariable String change) {
-		if (goodsdao.getMaxFlag() == false &&
-				Integer.parseInt(change) == goodsdao.MAX_CONTENTS)
-			min += goodsdao.MAX_CONTENTS;
-
-		if (Integer.parseInt(change) == -goodsdao.MAX_CONTENTS) {
-			min -= goodsdao.MAX_CONTENTS;
-		}
-
-		if (min < 0)
-			min = 0;
-
-		return "redirect:/index";
 	}
 
 	@RequestMapping("/sort/{name}")
@@ -110,27 +74,23 @@ public class GoodsController {
 
 		//失敗確認
 		if (result.hasErrors()) {
-
-			model.addAttribute("title", "商品管理ページ");
-			List<Goods> list = goodsdao.sortpageDb(sort, min);
-
-			if (goodsdao.sortpageDb(sort, min).size() < goodsdao.MAX_CONTENTS)
-				page = "end";
-			else if (min == 0)
-				page = "first";
-			else
-				page = "";
-
+			model.addAttribute("title", "入力ページ");
+			//商品データベースから取得
+			List<Goods> list = goodsdao.searchDb();
+			//カテゴリーデータベースから取得
+			List<Category> categorylist = categorydao.searchDb();
+			//商品データベースに格納
 			model.addAttribute("dbList", list);
-			model.addAttribute("page", page);
-			return "/index";
+			//カテゴリデータベースに格納
+			model.addAttribute("categoryList", categorylist);
+			return "index";
 		}
 		model.addAttribute("title", "confirm");
 		return "goods/confirm";
 	}
 
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Long id, Model model, @Validated Form form) {
+	public String edit(@PathVariable Long id, Model model, Form form) {
 		Goods goods = goodsdao.searchDbOne(id);
 		model.addAttribute("goods", goods);
 		return "/goods/edit";
@@ -138,11 +98,6 @@ public class GoodsController {
 
 	@RequestMapping("/edit/{id}/exe")
 	public String editExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			Goods goods = goodsdao.searchDbOne(id);
-			model.addAttribute("goods", goods);
-			return "/goods/edit";
-		}
 		Goods goods = new Goods();
 		goods.setStock(Integer.parseInt(form.getStock()));
 		goods.setName(form.getName());
@@ -159,6 +114,10 @@ public class GoodsController {
 		return "redirect:/index";
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	//							カテゴリ処理								//
+	//////////////////////////////////////////////////////////////////////////
+	
 	//確認
 	@RequestMapping("/complete/category")
 	public String completecategory(Model model, Form form) {
@@ -176,24 +135,29 @@ public class GoodsController {
 		//失敗確認
 		if (result.hasErrors()) {
 			model.addAttribute("title", "入力ページ");
-			//データベースから取得
-			List<Category> list = categorydao.searchDb();
-
-			//データベースに格納
+			//商品データベースから取得
+			List<Goods> list = goodsdao.searchDb();
+			//カテゴリーデータベースから取得
+			List<Category> categorylist = categorydao.searchDb();
+			//商品データベースに格納
 			model.addAttribute("dbList", list);
+			//カテゴリデータベースに格納
+			model.addAttribute("categoryList", categorylist);
 			return "index";
 		}
 		model.addAttribute("title", "confirm");
 		return "category/confirm";
 	}
-
+	
+	//編集処理
 	@RequestMapping("/edit/category/{id}")
 	public String editcategory(@PathVariable Long id, Model model, Form form) {
 		Category category = categorydao.searchDbOne(id);
 		model.addAttribute("category", category);
 		return "category/edit";
 	}
-
+	
+	//更新処理
 	@RequestMapping("/edit/category/{id}/exe")
 	public String editcategoryExe(@PathVariable Long id, @Validated Form form, BindingResult result, Model model) {
 		Category category = new Category();
@@ -202,7 +166,8 @@ public class GoodsController {
 		return "redirect:/index";
 
 	}
-
+	
+	//削除処理
 	@RequestMapping("/delete/category/{id}")
 	public String deletecategory(@PathVariable Long id) {
 		categorydao.deleteDb(id);
