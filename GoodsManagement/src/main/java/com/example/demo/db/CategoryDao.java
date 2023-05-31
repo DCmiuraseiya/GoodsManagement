@@ -72,7 +72,7 @@ public class CategoryDao {
 			//コンソールに表示
 			System.out.println("編集の実行");
 
-			db.update("UPDATE category SET name=?, stock=?, category=?, price=? WHERE id=?", category.getName(),  id);
+			db.update("UPDATE category SET name= ? WHERE id= ?;", category.getName(),  id);
 		}
 		
 		

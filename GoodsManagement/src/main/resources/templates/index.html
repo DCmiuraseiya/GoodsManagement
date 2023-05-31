@@ -19,7 +19,16 @@
 		<p><input type="number" name="stock" th:value="*{stock}"></p>
 		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">エラーメッセージ</div>
 		<p>カテゴリー</p>
-		<p><input type="text" name="category" th:value="*{category}"></p>
+		<select name="category"required>
+            <option value="">選択してください</option>
+            <option
+                th:each="category : ${categoryList}"
+                th:value="${category.name}"
+                th:text="${category.name}"
+                th:selected="${category.name == selectedValue}">
+            </option>
+        </select >
+        <a href="/confirm/category" class="btn">ボタン</a>
 		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">エラーメッセージ</div>
 		<p>値段</p>
 		<p><input type="number" name="price" th:value="*{price}"></p>
