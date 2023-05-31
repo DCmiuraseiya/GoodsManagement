@@ -8,6 +8,7 @@
 
 <body>
 	<h1><span th:text="${title}"></span></h1>
+
 	<table>
 		<tr>
 			<!-- <th>id</th> -->
@@ -30,7 +31,10 @@
 			</td>
 		</tr>
 	</table>
+
 	<div th:object="${form}">
+
+
 
 		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
 		<!--		hiddenなので見えないけどデータを送っている-->
@@ -39,6 +43,8 @@
 			<input type="hidden" name="stock" th:value="*{stock}">
 			<input type="hidden" name="category" th:value="*{category}">
 			<input type="hidden" name="price" th:value="*{price}">
+
+			<input type="submit" value="入力画面へ">
 			<input type="submit" value="一覧へ">
 		</form>
 

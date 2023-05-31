@@ -2,45 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>GoodsManagement</title>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/style.css}">
+	<title>GoodsManagement</title>
 </head>
 
 <body>
-	<h1><span th:text="${title}"></span></h1>
+	<h1><span th:text="${title}"></h1>
+	<h3>
+		<div th:object="${form}" id="confirm">
+			<table id="confirm_list">
+				<tr>
+					<th>商品名 :</th>
+					<td th:text="*{name}"></td>
+				</tr>
+				<tr>
+					<th>在庫数 :</th>
+					<td th:text="*{stock}"></td>
+				</tr>
+				<tr>
+					<th>カテゴリー :</th>
+					<td th:text="*{category}"></td>
+				</tr>
+				<tr>
+					<th>値段 :</th>
+					<td th:text="*{price}"></td>
+				</tr>
+			</table>
+		</div>
+	</h3>
 	<div th:object="${form}">
-		<p>入力内容ここから</p>
-		<p>商品名</p>
-		<p th:text="*{name}"></p>
-		<p>在庫数</p>
-		<p th:text="*{stock}"></p>
-		<p>カテゴリー</p>
-		<p th:text="*{category}"></p>
-		<p>値段</p>
-		<p th:text="*{price}"></p>
-		<p>入力内容ここまで</p>
-
-		<!--		formにデータを送る処理（入力画面に戻る再記入用）-->
-		<!--		hiddenなので見えないけどデータを送っている-->
-		<form method="get" action="#" th:action="@{/index}">
-			<input type="hidden" name="name" th:value="*{name}">
-			<input type="hidden" name="stock" th:value="*{stock}">
-			<input type="hidden" name="category" th:value="*{category}">
-			<input type="hidden" name="price" th:value="*{price}">
-			<input type="submit" value="入力画面へ">
-		</form>
-
-		<!--		確認画面にデータを送る処理-->
-		<form method="get" action="#" th:action="@{/complete}">
-			<input type="hidden" name="name" th:value="*{name}">
-			<input type="hidden" name="stock" th:value="*{stock}">
-			<input type="hidden" name="category" th:value="*{category}">
-			<input type="hidden" name="price" th:value="*{price}">
-			<input type="submit" value="完了画面へ">
-		</form>
-
+		<table id="confirm_form">
+			<tr>
+				<td>
+					<form method="get" action="#" th:action="@{/index}" id="confirm_index">
+						<input type="hidden" name="name" th:value="*{name}">
+						<input type="hidden" name="stock" th:value="*{stock}">
+						<input type="hidden" name="category" th:value="*{category}">
+						<input type="hidden" name="price" th:value="*{price}">
+						<input type="submit" value="入力画面へ">
+					</form>
+				</td>
+				<td>
+					<form method="get" action="#" th:action="@{/complete}" id="confirm_complete">
+						<input type="hidden" name="name" th:value="*{name}">
+						<input type="hidden" name="stock" th:value="*{stock}">
+						<input type="hidden" name="category" th:value="*{category}">
+						<input type="hidden" name="price" th:value="*{price}">
+						<input type="submit" value="完了画面へ">
+					</form>
+				</td>
+			</tr>
+		</table>
 	</div>
-
 </body>
 
 </html>
