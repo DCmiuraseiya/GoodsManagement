@@ -9,11 +9,36 @@
 
 <body>
 	<h1 th:text="${title}"></h1>
-	<div th:object="${goods}">
+	<p><a href="http://localhost:8080/index">商品管理ページへ</a></p>
+	<h3>
+		<form method="get" action="#" th:action="@{/edit/__*{id}__/exe}" th:object="${goods}">
+			<table id="goods_form">
+				<tr>
+					<th>商品名</th>
+					<td><input type="text" id="name" name="name" th:value="*{name}"></td>
+				</tr>
+				<tr>
+					<th>在庫数</th>
+					<td><input type="text" id="stock" name="stock" th:value="*{stock}"></td>
+				</tr>
+				<tr>
+					<th>カテゴリー</th>
+					<td><input type="text" id="category" name="category" th:value="*{category}"></td>
+				</tr>
+				<tr>
+					<th>値段</th>
+					<td><input type="text" id="price" name="price" th:value="*{price}"></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="更新">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</h3>
+	<!-- <div th:object="${goods}" id="edit_list">
 		<form action="#" method="get" th:action="@{/edit/__*{id}__/exe}">
-			<p>
-				番号:<span th:text="*{id}"></span> <input type="hidden" name="id" th:value="*{id}">
-			</p>
 			<p>
 				商品名: <input type="text" name="name" th:value="*{name}">
 			</p>
@@ -28,7 +53,7 @@
 			</p>
 			<input type="submit" value="更新">
 		</form>
-	</div>
+	</div> -->
 </body>
 
 </html>

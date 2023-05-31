@@ -8,47 +8,65 @@
 </head>
 
 <body>
-	<h1><span th:text="${title}"></span></h1>
+	<h1 th:text="${title}"></h1>
 
 	<h2>入力</h2>
-	<form method="get" action="#" th:action="@{/confirm}" th:object="${form}">
-
-		<p>商品名</p>
-		<p><input type="text" name="name" th:value="*{name}"></p>
-		<p>在庫数</p>
-		<p><input type="text" name="stock" th:value="*{stock}"></p>
-		<p>カテゴリー</p>
-		<p><input type="text" name="category" th:value="*{category}"></p>
-		<p>値段</p>
-		<p><input type="text" name="price" th:value="*{price}"></p>
-		<input type="submit" value="送信">
-	</form>
+	<h3>
+		<form method="get" action="#" th:action="@{/confirm}" th:object="${form}">
+			<table id="goods_form">
+				<tr>
+					<th>商品名</th>
+					<td><input type="text" id="name" name="name" th:value="*{name}"></td>
+				</tr>
+				<tr>
+					<th>在庫数</th>
+					<td><input type="text" id="stock" name="stock" th:value="*{stock}"></td>
+				</tr>
+				<tr>
+					<th>カテゴリー</th>
+					<td><input type="text" id="category" name="category" th:value="*{category}"></td>
+				</tr>
+				<tr>
+					<th>値段</th>
+					<td><input type="text" id="price" name="price" th:value="*{price}"></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="登録">
+						<input type="reset" value="リセッﾄ">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</h3>
 
 	<h2>商品一覧</h2>
-	<table>
-		<tr>
-			<th>商品名</th>
-			<th>在庫数</th>
-			<th>カテゴリー</th>
-			<th>値段</th>
-			<th>編集</th>
-			<th>削除</th>
-		</tr>
-		<tr th:each="res: ${dbList}">
-			<td th:text="${res.name}"></td>
-			<td th:text="${res.stock}"></td>
-			<td th:text="${res.category}"></td>
-			<td th:text="${res.price}"></td>
-			<td>
-				<form method="get" action="#" th:action="@{/edit/{id}(id=${res.id})}">
-					<input type="submit" value="編集">
-				</form>
-			</td>
-			<td>
-				<button type="submit" onclick="confirmDelete(event)" th:ids="${res.id}">削除</button>
-			</td>
-		</tr>
-	</table>
+	<h2>
+		<table id="goods_list">
+			<tr>
+				<th>商品名</th>
+				<th>在庫数</th>
+				<th>カテゴリー</th>
+				<th>値段</th>
+				<th>編集</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="res: ${dbList}">
+				<td th:text="${res.name}"></td>
+				<td th:text="${res.stock}"></td>
+				<td th:text="${res.category}"></td>
+				<td th:text="${res.price}"></td>
+				<td>
+					<form method="get" action="#" th:action="@{/edit/{id}(id=${res.id})}">
+						<input type="submit" value="編集">
+					</form>
+				</td>
+				<td>
+					<button type="submit" onclick="confirmDelete(event)" th:ids="${res.id}">削除</button>
+				</td>
+			</tr>
+		</table>
+	</h2>
 	<script th:src="@{/style.js}"></script>
 </body>
 

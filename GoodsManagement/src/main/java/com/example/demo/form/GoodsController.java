@@ -59,7 +59,7 @@ public class GoodsController {
 			model.addAttribute("dbList", list);
 			return "goods/input";
 		}
-		model.addAttribute("title", "confirm");
+		model.addAttribute("title", "確認ページ");
 		return "goods/confirm";
 	 }
 
@@ -67,6 +67,7 @@ public class GoodsController {
 	public String edit(@PathVariable Long id,Model model,Form form) {
 		Goods goods=goodsdao.searchDbOne(id);
 		model.addAttribute("goods",goods);
+		model.addAttribute("title", "編集ページ");
 		return "/goods/edit";
 	}
 	
